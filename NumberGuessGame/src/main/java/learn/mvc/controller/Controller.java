@@ -24,6 +24,7 @@ public class Controller {
         return int_Random;
     }
 
+    //If using stream method, we do not need getArrayString
     public String getArrayString(){
         String string = "";
         for (int i = 0; i < userGuesses.size(); i++){
@@ -39,9 +40,9 @@ public class Controller {
     @PostMapping("/userNumber")
     public ResponseEntity<Object> add(@RequestBody UserNumber userNumber){
         userGuesses.add(userNumber);
+        String message = result(userNumber) + "\n Your current guesses are: " + getArrayString();
 //        String message = result(userNumber) + "\n Your current guesses are:" +
 //                Arrays.toString(userGuesses.stream().map(userGuess -> userGuess.getUserNumber()).toArray());
-        String message = result(userNumber) + "\n Your current guesses are: " + getArrayString();
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
